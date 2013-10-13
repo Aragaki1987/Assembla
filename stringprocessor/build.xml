@@ -1,0 +1,42 @@
+<project name="calculator" basedir="." default="deploy">
+    <target name="init">
+        <property name="installbase" location="."/>
+        <property name="src" location="${installbase}/src"/>
+        <property name="classes" location="${installbase}/build/classes"/>
+        <property name="war" location="${installbase}/build/war"/>
+        <property name="ect" location="${installbase}/ect"/>
+        <property name="webinf" location="${installbase}/web/WEB-INF"/>
+    </target>
+
+    <target name="clean" depends="init">
+        <delete dir="${classes}"></delete>
+        <delete dir="${war}"></delete>
+    </target>
+
+    <target name="compile" depends="clean, init">
+        <!-- CREATE CLASSES DIR -->
+        <mkdir dir="${classes}"/>
+        <mkdir dir="${war}"/>
+        <mkdir dir="${war}/WEB-INF"/>
+
+        <javac srcdir="${src}"
+               destdir="${classes}">
+            <include name="**/*.java"/>
+        </javac>
+    </target>
+
+    <target name="deploy" depends="compile">
+        <copy todir="${webinf}/classes" >
+            <fileset dir="${classes}" />
+        </copy>
+        <copy todir="${war}/WEB-INF" >
+            <fileset dir="${webinf}" />
+        </copy>
+
+        <jar basedir="${war}" destfile="stringprocessor.war" />
+
+    </target>
+
+
+
+</project>
