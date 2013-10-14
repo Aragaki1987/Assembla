@@ -55,6 +55,9 @@
       <PyConsoleSettings />
     </option>
   </component>
+  <component name="SvnBranchConfigurationManager">
+    <option name="mySupportsUserInfoFilter" value="true" />
+  </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
     <option name="SRCSAFEINI_PATH" value="" />

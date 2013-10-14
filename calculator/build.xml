@@ -1,5 +1,6 @@
 <project name="calculator" basedir="." default="deploy">
     <target name="init">
+        <property environment="env"/>
         <property name="installbase" location="."/>
         <property name="src" location="${installbase}/src"/>
         <property name="classes" location="${installbase}/build/classes"/>
@@ -19,7 +20,8 @@
         <property name="gen-classdir" value="${class-dir}"/>
         <!-- Absolute path of the wsgen command. -->
         <property name="wsgen-cmd"
-                  value="/home/san/Desktop/Setup/jdk1.6.0_43/bin/wsgen"/>
+                  value="${env.JAVA_HOME}/bin/wsgen"/>
+
     </target>
 
     <target name="clean" depends="init">
