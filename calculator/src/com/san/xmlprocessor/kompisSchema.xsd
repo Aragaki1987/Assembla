@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:ivan="http://www.ivan.com/schemas"
+        targetNamespace="http://www.ivan.com/schemas"
+        attributeFormDefault="unqualified">
+    <element name="kompisRelation" type="ivan:KompisRelation"/>
+    <element name="person" type="ivan:Person"/>
+    <attribute name="eyeColour" type="string" default="blue"/>
+    <complexType name="KompisRelation">
+        <sequence>
+            <element name="person" type="ivan:Person"/>
+            <element name="friend" type="ivan:Person" minOccurs="0"
+                     maxOccurs="unbounded" nillable="false"/>
+        </sequence>
+        <attribute name="degree" type="string" use="optional"
+                   default="acquaintance"/>
+    </complexType>
+    <complexType name="Person">
+        <sequence>
+            <element name="firstName" type="string" nillable="false"/>
+            <element name="lastName" type="string" nillable="false"/>
+            <element name="age" type="int"/>
+            <element name="favColour" type="string" minOccurs="0"
+                     maxOccurs="unbounded"/>
+        </sequence>
+        <attribute ref="ivan:eyeColour"/>
+        <attribute name="hasDog" type="boolean"/>
+    </complexType>
+</schema>
