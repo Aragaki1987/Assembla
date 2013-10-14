@@ -2,12 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="648e84e1-85c7-4783-bf51-2e0ddf8406c8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/san/xmlprocessor" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/san/xmlprocessor/DOMExample.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/san/xmlprocessor/SAXErrorHandler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/san/xmlprocessor/SAXExample.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/san/xmlprocessor/kompisSchema.xsd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/san/xmlprocessor/kompisar.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="calculator.iws" />
@@ -30,7 +24,7 @@
     <file path="/a.dummy" changelist="648e84e1-85c7-4783-bf51-2e0ddf8406c8" time="1381564929281" ignored="false" />
     <file path="/CalClient.java" changelist="648e84e1-85c7-4783-bf51-2e0ddf8406c8" time="1381613784268" ignored="false" />
     <file path="$PROJECT_DIR$/build/war/WEB-INF/wsdl/CalculatorService_schema1.xsd" changelist="648e84e1-85c7-4783-bf51-2e0ddf8406c8" time="1381720697911" ignored="false" />
-    <file path="/Dummy.txt" changelist="648e84e1-85c7-4783-bf51-2e0ddf8406c8" time="1381735121086" ignored="false" />
+    <file path="/Dummy.txt" changelist="648e84e1-85c7-4783-bf51-2e0ddf8406c8" time="1381735176822" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -583,17 +577,21 @@
       <changelist id="648e84e1-85c7-4783-bf51-2e0ddf8406c8" name="Default" comment="" />
       <created>1381553557951</created>
       <updated>1381553557951</updated>
-      <workItem from="1381718938914" duration="6000000" />
+      <workItem from="1381718938914" duration="6045000" />
     </task>
     <task id="LOCAL-00001">
       <created>1381735146126</created>
       <updated>1381735146126</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002">
+      <created>1381735195111</created>
+      <updated>1381735195111</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6000000" />
+    <option name="totallyTimeSpent" value="6045000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-2" y="25" width="1862" height="978" extended-state="6" />
