@@ -1,0 +1,11 @@
+<bindings
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        wsdlLocation="Calculator.wsdl"
+        xmlns="http://java.sun.com/xml/ns/jaxws">
+    <!-- applies to wsdl:definitions node, that would mean the entire wsdl -->
+    <enableWrapperStyle>true</enableWrapperStyle>
+    <!-- wsdl:portType operation customization -->
+    <bindings node="wsdl:definitions/wsdl:portType[@name='Calculator']/wsdl:operation[@name='addNumbers']">
+        <enableWrapperStyle>false</enableWrapperStyle>
+    </bindings>
+</bindings>
