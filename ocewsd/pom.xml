@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- The Basics -->
+    <groupId>com.san.test</groupId>
+    <artifactId>test</artifactId>
+    <version>1.0</version>
+    <packaging>war</packaging>
+
+    <build>
+        <finalName>Calculator</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.axis2</groupId>
+                <artifactId>axis2-java2wsdl-maven-plugin</artifactId>
+                <configuration>
+                    <className>com.san.calculator.server.MathUtil</className>
+                    <outputFileName>./src/main/webapp/WEB-INF/wsdl/Calculator.wsdl</outputFileName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java2wsdl</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+
+    <!-- More Project Information -->
+    <name>Test</name>
+    <description>San test</description>
+</project>
