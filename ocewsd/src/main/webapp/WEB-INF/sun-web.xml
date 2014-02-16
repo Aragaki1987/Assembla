@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sun-web-app error-url="">
+    <context-root>/helloservice</context-root>
+    <class-loader delegate="true"/>
+    <security-role-mapping>
+        <role-name>basicUser</role-name>
+        <group-name>user</group-name>
+    </security-role-mapping>
+</sun-web-app>

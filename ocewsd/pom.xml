@@ -6,9 +6,17 @@
 
     <!-- The Basics -->
     <groupId>com.san.test</groupId>
-    <artifactId>test</artifactId>
+    <artifactId>Calculator</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>jaxws-rt</artifactId>
+            <version>2.2.8</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <finalName>Calculator</finalName>
@@ -33,6 +41,6 @@
 
 
     <!-- More Project Information -->
-    <name>Test</name>
-    <description>San test</description>
+    <name>Calculator</name>
+    <description>Calculator</description>
 </project>

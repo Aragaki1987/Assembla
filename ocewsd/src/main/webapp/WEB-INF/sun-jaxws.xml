@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoints
+        xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime"
+        version="2.0">
+    <endpoint
+            name="CalculatorSOAP11"
+            implementation="com.san.calculator.server.MathUtilImplSOAP11"
+            url-pattern="/math11"/>
+
+    <endpoint
+            name="CalculatorSOAP12"
+            implementation="com.san.calculator.server.MathUtilImplSOAP12"
+            url-pattern="/math11"/>
+</endpoints>
