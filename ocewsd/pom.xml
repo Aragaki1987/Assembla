@@ -12,9 +12,29 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.sun.xml.ws</groupId>
-            <artifactId>jaxws-rt</artifactId>
+            <groupId>javax.xml.ws</groupId>
+            <artifactId>jaxws-api</artifactId>
             <version>2.2.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-common</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.ext</groupId>
+            <artifactId>jersey-proxy-client</artifactId>
+            <version>2.6</version>
         </dependency>
     </dependencies>
 

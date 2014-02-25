@@ -21,5 +21,5 @@ import javax.xml.ws.ResponseWrapper;
 public interface MathUtil {
 
     @WebMethod
-    public int addNumbers(int arg0, int arg1);
+    public Integer addNumbers(int arg0, int arg1);
 }

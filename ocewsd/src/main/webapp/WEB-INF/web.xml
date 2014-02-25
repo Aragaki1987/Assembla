@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<web-app xmlns="http://java.sun.com/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/j2ee/web-app_2_5.xsd"
-         version="2.5" >
+<web-app>
+    <!--Soap-->
     <listener>
         <listener-class>
             com.sun.xml.ws.transport.http.servlet.WSServletContextListener
@@ -19,28 +17,26 @@
         <servlet-name>calculator</servlet-name>
         <url-pattern>/math11</url-pattern>
     </servlet-mapping>
+
+    <!--Jersey-->
+    <servlet>
+        <servlet-name>Jersey REST Service</servlet-name>
+        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>com.sun.jersey.config.property.packages</param-name>
+            <param-value>com.san.calculator.server</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Jersey REST Service</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
+
+
     <session-config>
         <session-timeout>120</session-timeout>
     </session-config>
-
-    <security-constraint>
-        <display-name>SecurityConstraint</display-name>
-        <web-resource-collection>
-            <web-resource-name>WRCollection</web-resource-name>
-            <url-pattern>/hello</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>basicUser</role-name>
-        </auth-constraint>
-        <user-data-constraint>
-            <transport-guarantee>NONE</transport-guarantee>
-        </user-data-constraint>
-    </security-constraint>
-    <login-config>
-        <auth-constraint>BASIC</auth-constraint>
-        <realm-name>file</realm-name>
-    </login-config>
-
 </web-app>
 
 

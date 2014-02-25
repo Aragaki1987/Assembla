@@ -1,4 +1,6 @@
-package com.san.calculator.server;
+package com.san.calculator.server.impl;
+
+import com.san.calculator.server.MathUtil;
 
 import javax.jws.WebService;
 
@@ -7,7 +9,7 @@ import javax.jws.WebService;
 public class MathUtilImplSOAP12 implements MathUtil {
 
     @Override
-    public int addNumbers(int arg0, int arg1) {
+    public Integer addNumbers(int arg0, int arg1) {
         return arg0 + arg1;
     }
 }
