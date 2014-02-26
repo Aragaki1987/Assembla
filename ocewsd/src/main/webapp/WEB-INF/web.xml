@@ -24,7 +24,7 @@
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>com.san.calculator.server</param-value>
+            <param-value>com.san.calculator.server.rest</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>

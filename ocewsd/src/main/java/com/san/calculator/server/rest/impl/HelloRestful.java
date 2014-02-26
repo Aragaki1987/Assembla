@@ -1,12 +1,10 @@
-package com.san.calculator.server.impl;
+package com.san.calculator.server.rest.impl;
 
 
-import com.san.calculator.server.HelloInterface;
 import com.san.calculator.server.entities.Book;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.xml.bind.JAXBElement;
 import java.util.ArrayList;
 
 @Path("/hello")

@@ -1,5 +1,5 @@
 
-package com.san.calculator.server;
+package com.san.calculator.server.soap;
 
 
 import javax.jws.WebMethod;

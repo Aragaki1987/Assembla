@@ -1,4 +1,4 @@
-package com.san.calculator.server;
+package com.san.calculator.server.rest;
 
 import com.san.calculator.server.entities.Book;
 

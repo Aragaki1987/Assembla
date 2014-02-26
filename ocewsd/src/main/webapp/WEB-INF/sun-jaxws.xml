@@ -4,11 +4,11 @@
         version="2.0">
     <endpoint
             name="CalculatorSOAP11"
-            implementation="com.san.calculator.server.impl.MathUtilImplSOAP11"
+            implementation="com.san.calculator.server.soap.impl.MathUtilImplSOAP11"
             url-pattern="/math11"/>
 
     <endpoint
             name="CalculatorSOAP12"
-            implementation="com.san.calculator.server.impl.MathUtilImplSOAP12"
+            implementation="com.san.calculator.server.soap.impl.MathUtilImplSOAP12"
             url-pattern="/math11"/>
 </endpoints>

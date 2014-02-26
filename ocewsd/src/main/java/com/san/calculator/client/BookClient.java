@@ -1,6 +1,6 @@
 package com.san.calculator.client;
 
-import com.san.calculator.server.HelloInterface;
+import com.san.calculator.server.rest.HelloInterface;
 import com.san.calculator.server.entities.Book;
 import org.glassfish.jersey.client.proxy.WebResourceFactory;
 

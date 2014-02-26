@@ -1,6 +1,6 @@
-package com.san.calculator.server.impl;
+package com.san.calculator.server.soap.impl;
 
-import com.san.calculator.server.MathUtil;
+import com.san.calculator.server.soap.MathUtil;
 
 import javax.annotation.Resource;
 import javax.jws.WebService;
@@ -9,7 +9,7 @@ import javax.xml.ws.handler.MessageContext;
 import java.util.List;
 import java.util.Map;
 
-@WebService(endpointInterface = "com.san.calculator.server.MathUtil", targetNamespace = "http://www.san.com/calculator",
+@WebService(endpointInterface = "com.san.calculator.server.soap.MathUtil", targetNamespace = "http://www.san.com/calculator",
         serviceName = "Calculator", portName = "CalculatorTestPortName11")
 public class MathUtilImplSOAP11 implements MathUtil {
 

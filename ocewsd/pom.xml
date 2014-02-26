@@ -45,7 +45,7 @@
                 <groupId>org.apache.axis2</groupId>
                 <artifactId>axis2-java2wsdl-maven-plugin</artifactId>
                 <configuration>
-                    <className>com.san.calculator.server.MathUtil</className>
+                    <className>com.san.calculator.server.soap.MathUtil</className>
                     <outputFileName>./src/main/webapp/WEB-INF/wsdl/Calculator.wsdl</outputFileName>
                 </configuration>
                 <executions>
