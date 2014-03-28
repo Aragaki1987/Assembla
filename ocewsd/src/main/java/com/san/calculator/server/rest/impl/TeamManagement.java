@@ -12,7 +12,7 @@ import java.io.ByteArrayInputStream;
 @WebServiceProvider(portName = "teamport",
         serviceName = "teamservice",
         targetNamespace = "http://san.com.vn/team")
-@ServiceMode(value = Service.Mode.MESSAGE)
+@ServiceMode(value = Service.Mode.PAYLOAD)
 @BindingType(value = HTTPBinding.HTTP_BINDING)
 public class TeamManagement implements Provider<Source> {
     @Resource
