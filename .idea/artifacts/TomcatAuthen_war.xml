@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="TomcatAuthen:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="TomcatAuthen.war">
+      <element id="artifact" artifact-name="TomcatAuthen:war exploded" />
+    </root>
+  </artifact>
+</component>
