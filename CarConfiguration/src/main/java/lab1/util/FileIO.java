@@ -1,12 +1,12 @@
 package lab1.util;
 
-import lab1.exception.AutomobileException;
+import lab1.exception.AutomotiveException;
 import lab1.model.Automotive;
 
 import java.io.*;
 
 public class FileIO {
-    public static Automotive readFile(String fileLocation) throws AutomobileException {
+    public static Automotive readFile(String fileLocation) throws AutomotiveException {
         Automotive automotive = new Automotive();
         try {
             FileReader file = new FileReader(fileLocation);
@@ -26,29 +26,29 @@ public class FileIO {
             }
             buff.close();
         } catch (IOException e) {
-            throw new AutomobileException("Cannot read configuration file", e);
+            throw new AutomotiveException("Cannot read configuration file", e);
         }
 
         return automotive;
     }
 
-    public static void serializeAuto(Automotive fordZTW, String fileLocation) throws AutomobileException {
+    public static void serializeAuto(Automotive fordZTW, String fileLocation) throws AutomotiveException {
         try {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("auto.ser"));
             out.writeObject(fordZTW);
             out.close();
         } catch (IOException e) {
-            throw new AutomobileException("Cannot serialize FordZTW", e);
+            throw new AutomotiveException("Cannot serialize FordZTW", e);
         }
     }
 
-    public static Automotive DeserializeAuto(String file) throws AutomobileException {
+    public static Automotive DeserializeAuto(String file) throws AutomotiveException {
         Automotive automotive = null;
         try {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
             automotive = (Automotive) in.readObject();
         } catch (Exception e) {
-            throw new AutomobileException("Cannot deserialize FordZTW", e);
+            throw new AutomotiveException("Cannot deserialize FordZTW", e);
         }
 
         return automotive;

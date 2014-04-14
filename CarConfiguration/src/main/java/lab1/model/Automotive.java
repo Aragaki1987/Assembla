@@ -1,6 +1,6 @@
 package lab1.model;
 
-import lab1.exception.AutomobileException;
+import lab1.exception.AutomotiveException;
 
 import java.util.Arrays;
 
@@ -47,23 +47,23 @@ public class Automotive {
         this.optionSets = optionSets;
     }
 
-    public OptionSet getOptionSet(String name) throws AutomobileException {
+    public OptionSet getOptionSet(String name) throws AutomotiveException {
         try {
             return optionSets[findOptionSet(name)];
         } catch (Throwable th) {
-            throw new AutomobileException("Cannot find option.", th);
+            throw new AutomotiveException("Cannot find option.", th);
         }
     }
 
-    public void setOptionSet(int i, OptionSet optionSet) throws AutomobileException {
+    public void setOptionSet(int i, OptionSet optionSet) throws AutomotiveException {
         try {
             optionSets[i] = optionSet;
         } catch (Throwable th) {
-            throw new AutomobileException("Cannot add option to this position", th);
+            throw new AutomotiveException("Cannot add option to this position", th);
         }
     }
 
-    public void addOptionSet(String optionSetName, String optionName, float price) throws AutomobileException {
+    public void addOptionSet(String optionSetName, String optionName, float price) throws AutomotiveException {
         int i = findOptionSet(optionSetName);
         OptionSet optSet = null;
         if(i == -1) {
@@ -75,11 +75,11 @@ public class Automotive {
         optSet.addOption(optionName, price);
     }
 
-    public void deleteOptionSet(String name) throws AutomobileException {
+    public void deleteOptionSet(String name) throws AutomotiveException {
         try {
             optionSets[findOptionSet(name)] = null;
         } catch (Throwable th) {
-            throw new AutomobileException("Cannot add option to this position", th);
+            throw new AutomotiveException("Cannot add option to this position", th);
         }
     }
 

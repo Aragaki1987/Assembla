@@ -1,6 +1,6 @@
 package lab1.model;
 
-import lab1.exception.AutomobileException;
+import lab1.exception.AutomotiveException;
 
 import java.util.Arrays;
 
@@ -42,47 +42,47 @@ class OptionSet {
         this.options = options;
     }
 
-    protected void setOption(int i, String name, float price) throws AutomobileException {
+    protected void setOption(int i, String name, float price) throws AutomotiveException {
         try {
             options[i].setName(name);
             options[i].setPrice(price);
         } catch (Throwable th) {
-            throw new AutomobileException("Cannot set option at " + i, th);
+            throw new AutomotiveException("Cannot set option at " + i, th);
         }
     }
 
-    protected void addOption(String name, float price) throws AutomobileException {
+    protected void addOption(String name, float price) throws AutomotiveException {
         try {
             Option option = new Option(name, price);
             int oldSize = options.length;
             options = Arrays.copyOf(options, oldSize + 1);
             options[oldSize] = option;
         } catch (Throwable th) {
-            throw new AutomobileException("Cannot add option ", th);
+            throw new AutomotiveException("Cannot add option ", th);
         }
     }
 
-    protected Option getOption(String name) throws AutomobileException {
+    protected Option getOption(String name) throws AutomotiveException {
         try {
             return options[findOption(name)];
         } catch (Throwable th) {
-            throw new AutomobileException("Cannot find option." + name, th);
+            throw new AutomotiveException("Cannot find option." + name, th);
         }
     }
 
-    protected float getOptionPrice(String name) throws AutomobileException {
+    protected float getOptionPrice(String name) throws AutomotiveException {
         try {
             return getOption(name).getPrice();
         } catch (Throwable th) {
-            throw new AutomobileException("Cannot find option " + name, th);
+            throw new AutomotiveException("Cannot find option " + name, th);
         }
     }
 
-    protected void deleteOption(String name) throws AutomobileException {
+    protected void deleteOption(String name) throws AutomotiveException {
         try {
             options[findOption(name)] = null;
         } catch (Throwable th) {
-            throw new AutomobileException("Cannot delete option " + name, th);
+            throw new AutomotiveException("Cannot delete option " + name, th);
         }
     }
 
