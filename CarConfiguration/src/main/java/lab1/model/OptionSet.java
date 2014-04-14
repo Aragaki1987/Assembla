@@ -2,9 +2,10 @@ package lab1.model;
 
 import lab1.exception.AutomotiveException;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-class OptionSet {
+class OptionSet implements Serializable {
     private String name;
     private Option [] options;
 
@@ -42,7 +43,7 @@ class OptionSet {
         this.options = options;
     }
 
-    protected void setOption(int i, String name, float price) throws AutomotiveException {
+    protected void setOption(int i, String name, int price) throws AutomotiveException {
         try {
             options[i].setName(name);
             options[i].setPrice(price);
@@ -51,7 +52,7 @@ class OptionSet {
         }
     }
 
-    protected void addOption(String name, float price) throws AutomotiveException {
+    protected void addOption(String name, int price) throws AutomotiveException {
         try {
             Option option = new Option(name, price);
             int oldSize = options.length;
@@ -70,7 +71,7 @@ class OptionSet {
         }
     }
 
-    protected float getOptionPrice(String name) throws AutomotiveException {
+    protected int getOptionPrice(String name) throws AutomotiveException {
         try {
             return getOption(name).getPrice();
         } catch (Throwable th) {
@@ -109,14 +110,14 @@ class OptionSet {
         return result.toString();
     }
 
-    private class Option {
+    private class Option implements Serializable {
         private String name;
-        private float price;
+        private int price;
 
         private Option() {
         }
 
-        protected Option(String name, float price) {
+        protected Option(String name, int price) {
             this.name = name;
             this.price = price;
         }
@@ -129,11 +130,11 @@ class OptionSet {
             this.name = name;
         }
 
-        protected float getPrice() {
+        protected int getPrice() {
             return price;
         }
 
-        protected void setPrice(float price) {
+        protected void setPrice(int price) {
             this.price = price;
         }
 

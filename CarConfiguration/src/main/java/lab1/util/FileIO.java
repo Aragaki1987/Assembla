@@ -12,20 +12,25 @@ public class FileIO {
             FileReader file = new FileReader(fileLocation);
             BufferedReader buff = new BufferedReader(file);
             boolean eof = false;
-            automotive.setName(buff.readLine());
-            automotive.setBasePrice(Float.parseFloat(buff.readLine()));
             while (!eof) {
                 String line = buff.readLine();
                 if (line == null) {
                     eof = true;
                 } else {
-                    String[] temp = line.split(",");
-                    if (temp.length == 3)
-                        automotive.addOptionSet(temp[0], temp[1], Float.parseFloat(temp[2]));
+                    if (line.contains("name")) {
+                        automotive.setName(line.split("=")[1]);
+                    } else if (line.contains("basePrice")) {
+                        automotive.setBasePrice(Integer.parseInt(line.split("=")[1]));
+                    } else {
+                        String[] temp = line.split(",");
+                        if (temp.length == 3)
+                            automotive.addOptionSet(temp[0], temp[1], Integer.parseInt(temp[2]));
+                    }
                 }
             }
             buff.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
+            e.printStackTrace();
             throw new AutomotiveException("Cannot read configuration file", e);
         }
 
@@ -37,7 +42,8 @@ public class FileIO {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("auto.ser"));
             out.writeObject(fordZTW);
             out.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
+            e.printStackTrace();
             throw new AutomotiveException("Cannot serialize FordZTW", e);
         }
     }

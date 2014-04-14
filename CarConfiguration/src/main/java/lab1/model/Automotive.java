@@ -2,32 +2,33 @@ package lab1.model;
 
 import lab1.exception.AutomotiveException;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Automotive {
+public class Automotive implements Serializable {
     private String name;
-    private float basePrice;
+    private int basePrice;
     private OptionSet[] optionSets;
 
     public Automotive() {
         optionSets = new OptionSet[0];
     }
 
-    public Automotive(String name, float basePrice, int optionSetSize) {
+    public Automotive(String name, int basePrice, int optionSetSize) {
         this.name = name;
         this.basePrice = basePrice;
         optionSets = new OptionSet[optionSetSize];
 
-        for(int i = 0; i < optionSets.length; i++) {
+        for (int i = 0; i < optionSets.length; i++) {
             optionSets[i] = new OptionSet();
         }
     }
 
-    public float getBasePrice() {
+    public int getBasePrice() {
         return basePrice;
     }
 
-    public void setBasePrice(float basePrice) {
+    public void setBasePrice(int basePrice) {
         this.basePrice = basePrice;
     }
 
@@ -39,11 +40,11 @@ public class Automotive {
         this.name = name;
     }
 
-    public OptionSet[] getOptionSets() {
+    protected OptionSet[] getOptionSets() {
         return optionSets;
     }
 
-    public void setOptionSets(OptionSet[] optionSets) {
+    protected void setOptionSets(OptionSet[] optionSets) {
         this.optionSets = optionSets;
     }
 
@@ -55,7 +56,7 @@ public class Automotive {
         }
     }
 
-    public void setOptionSet(int i, OptionSet optionSet) throws AutomotiveException {
+    protected void setOptionSet(int i, OptionSet optionSet) throws AutomotiveException {
         try {
             optionSets[i] = optionSet;
         } catch (Throwable th) {
@@ -63,11 +64,14 @@ public class Automotive {
         }
     }
 
-    public void addOptionSet(String optionSetName, String optionName, float price) throws AutomotiveException {
+    public void addOptionSet(String optionSetName, String optionName, int price) throws AutomotiveException {
         int i = findOptionSet(optionSetName);
         OptionSet optSet = null;
-        if(i == -1) {
-            optSet = new OptionSet();
+        if (i == -1) {
+            optSet = new OptionSet(optionSetName);
+            int oldSize = optionSets.length;
+            optionSets = Arrays.copyOf(optionSets, oldSize + 1);
+            optionSets[oldSize] = optSet;
         } else {
             optSet = getOptionSet(optionSetName);
         }
@@ -84,12 +88,15 @@ public class Automotive {
     }
 
     public int findOptionSet(String name) {
-        if (optionSets != null) {
-            for (int i = 0; i < optionSets.length; i++) {
-                if (optionSets[i].getName().equals(name)) {
-                    return i;
+        try {
+            if (optionSets != null && optionSets.length > 0) {
+                for (int i = 0; i < optionSets.length; i++) {
+                    if (optionSets[i].getName().equals(name)) {
+                        return i;
+                    }
                 }
             }
+        } catch (Exception e) {
         }
 
         return -1;
