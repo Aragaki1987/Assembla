@@ -5,11 +5,13 @@ import lab1.exception.AutomotiveException;
 import java.io.Serializable;
 import java.util.Arrays;
 
+//OptionSet class that can be serialized into stream
 class OptionSet implements Serializable {
-    private String name;
-    private Option [] options;
+    private String name;  // name of OptionSet (color, transmission, ... )
+    private Option [] options; // list of option for each option set
 
 
+    //constructor for optionset with combination of properties. They have protected modifier to prevent access from outside
     protected OptionSet() {
         options = new Option[0];
     }
@@ -27,6 +29,8 @@ class OptionSet implements Serializable {
         }
     }
 
+
+    //getter and setter ( modified by hand to get and set single option from option list ) with all CRUD
     protected String getName() {
         return name;
     }
@@ -87,6 +91,8 @@ class OptionSet implements Serializable {
         }
     }
 
+
+    //private helper method
     private int findOption(String name) {
         if(options != null) {
             for(int i = 0; i < options.length; i++) {
@@ -98,6 +104,7 @@ class OptionSet implements Serializable {
         return -1;
     }
 
+    //toString method uses StringBuilder
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
@@ -110,10 +117,13 @@ class OptionSet implements Serializable {
         return result.toString();
     }
 
+    //Option class is inner class of OptionSet class, can be serialized
     private class Option implements Serializable {
-        private String name;
-        private int price;
+        private String name; // name of option (auto, manual, ...)
+        private int price;  // price of option
 
+
+        //2 constructors with combination of properties
         private Option() {
         }
 
@@ -122,6 +132,8 @@ class OptionSet implements Serializable {
             this.price = price;
         }
 
+
+        //getter and setter for each properties
         protected String getName() {
             return name;
         }
@@ -138,6 +150,7 @@ class OptionSet implements Serializable {
             this.price = price;
         }
 
+        //toString method uses StringBuilder
         @Override
         public String toString() {
             StringBuilder result = new StringBuilder();

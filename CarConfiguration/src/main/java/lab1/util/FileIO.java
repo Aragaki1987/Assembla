@@ -6,6 +6,10 @@ import lab1.model.Automotive;
 import java.io.*;
 
 public class FileIO {
+    public static final String FILE_CONFIGURATION="FordZTW.txt";
+    public static final String FILE_SERIALIZATION="auto.ser";
+
+    //Step 6 – Populating data in Model Package using a text file.
     public static Automotive readFile(String fileLocation) throws AutomotiveException {
         Automotive automotive = new Automotive();
         try {
@@ -17,9 +21,9 @@ public class FileIO {
                 if (line == null) {
                     eof = true;
                 } else {
-                    if (line.contains("name")) {
+                    if (line.contains("name=")) {
                         automotive.setName(line.split("=")[1]);
-                    } else if (line.contains("basePrice")) {
+                    } else if (line.contains("basePrice=")) {
                         automotive.setBasePrice(Integer.parseInt(line.split("=")[1]));
                     } else {
                         String[] temp = line.split(",");
@@ -37,6 +41,7 @@ public class FileIO {
         return automotive;
     }
 
+    //Step 7: Serialization and DeSerialization
     public static void serializeAuto(Automotive fordZTW, String fileLocation) throws AutomotiveException {
         try {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("auto.ser"));
