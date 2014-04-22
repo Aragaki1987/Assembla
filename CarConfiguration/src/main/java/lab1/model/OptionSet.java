@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 //OptionSet class that can be serialized into stream
-class OptionSet implements Serializable {
+public class OptionSet implements Serializable {
     private String name;  // name of OptionSet (color, transmission, ... )
     private Option [] options; // list of option for each option set
 
@@ -81,6 +81,10 @@ class OptionSet implements Serializable {
         } catch (Throwable th) {
             throw new AutomotiveException("Cannot find option " + name, th);
         }
+    }
+
+    protected void setOptionPrice(String optionName, int newPrice) throws AutomotiveException {
+        getOption(optionName).setPrice(newPrice);
     }
 
     protected void deleteOption(String name) throws AutomotiveException {

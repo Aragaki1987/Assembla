@@ -80,6 +80,14 @@ public class Automotive implements Serializable {
         }
     }
 
+    public void setOptionSetName(String oldName, String newName) throws AutomotiveException {
+        getOptionSet(oldName).setName(newName);
+    }
+
+    public void setOptionPrice(String optionSetName, String optionName, int newprice) throws AutomotiveException {
+        getOptionSet(optionSetName).setOptionPrice(optionName, newprice);
+    }
+
     protected void setOptionSet(int i, OptionSet optionSet) throws AutomotiveException {
         try {
             optionSets[i] = optionSet;

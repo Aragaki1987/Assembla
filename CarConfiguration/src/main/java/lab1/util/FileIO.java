@@ -6,11 +6,8 @@ import lab1.model.Automotive;
 import java.io.*;
 
 public class FileIO {
-    public static final String FILE_CONFIGURATION="FordZTW.txt";
-    public static final String FILE_SERIALIZATION="auto.ser";
-
     //Step 6 – Populating data in Model Package using a text file.
-    public static Automotive readFile(String fileLocation) throws AutomotiveException {
+    public Automotive readFile(String fileLocation) throws AutomotiveException {
         Automotive automotive = new Automotive();
         try {
             FileReader file = new FileReader(fileLocation);
@@ -33,16 +30,30 @@ public class FileIO {
                 }
             }
             buff.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new AutomotiveException("Cannot read configuration file", e);
+
+            if(automotive.getName() == null) {
+                throw new AutomotiveException("AutoMotive name is missing");  //1st Exception if cannot get name from file
+            }
+            if(automotive.getBasePrice() == 0) {
+                throw new AutomotiveException("AutoMotive baseprice is missing or equals 0"); //2nd Exception if cannot get baseprice from file or baseprice equals 0
+            }
+
+            if(automotive.getOptionSets().length == 0) {
+                throw new AutomotiveException("AutoMotive does not have any OptionSet"); //3rd Exception if cannot get any optionset from file.
+            }
+
+
+        } catch (FileNotFoundException e) {
+            throw new AutomotiveException("Cannot locate the file", e);  //4th Exception if cannot reach the file, or fileName is wrong
+        } catch (IOException e) {
+            throw new AutomotiveException("Cannot read configuration file", e); //5th Exception if have errors while reading file
         }
 
         return automotive;
     }
 
     //Step 7: Serialization and DeSerialization
-    public static void serializeAuto(Automotive fordZTW, String fileLocation) throws AutomotiveException {
+    public void serializeAuto(Automotive fordZTW, String fileLocation) throws AutomotiveException {
         try {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("auto.ser"));
             out.writeObject(fordZTW);
@@ -53,7 +64,7 @@ public class FileIO {
         }
     }
 
-    public static Automotive DeserializeAuto(String file) throws AutomotiveException {
+    public Automotive DeserializeAuto(String file) throws AutomotiveException {
         Automotive automotive = null;
         try {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
