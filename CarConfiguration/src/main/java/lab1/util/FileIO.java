@@ -25,20 +25,20 @@ public class FileIO {
                     } else {
                         String[] temp = line.split(",");
                         if (temp.length == 3)
-                            automotive.addOptionSet(temp[0], temp[1], Integer.parseInt(temp[2]));
+                            automotive.addOptionSet(temp[0].trim(), temp[1].trim(), Integer.parseInt(temp[2].trim()));
                     }
                 }
             }
             buff.close();
 
-            if(automotive.getName() == null) {
+            if (automotive.getName() == null) {
                 throw new AutomotiveException("AutoMotive name is missing");  //1st Exception if cannot get name from file
             }
-            if(automotive.getBasePrice() == 0) {
+            if (automotive.getBasePrice() == 0) {
                 throw new AutomotiveException("AutoMotive baseprice is missing or equals 0"); //2nd Exception if cannot get baseprice from file or baseprice equals 0
             }
 
-            if(automotive.getOptionSets().length == 0) {
+            if (automotive.getOptionSets().size() == 0) {
                 throw new AutomotiveException("AutoMotive does not have any OptionSet"); //3rd Exception if cannot get any optionset from file.
             }
 

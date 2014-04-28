@@ -5,30 +5,40 @@ import lab1.model.Automotive;
 import lab1.model.OptionSet;
 import lab1.util.FileIO;
 
-public abstract class ProxyAutomobile{
-    private Automotive a1;
+import java.util.LinkedHashMap;
+import java.util.Set;
 
-    public void buildAuto(String fileName) throws AutomotiveException {
-        a1 =  new FileIO().readFile(fileName);
+public abstract class ProxyAutomobile {
+    private LinkedHashMap<String, Automotive> autoMotives = new LinkedHashMap<String, Automotive>();
+
+    public Automotive buildAuto(String fileName) throws AutomotiveException {
+        return new FileIO().readFile(fileName);
     }
 
     public void printAuto() {
-        System.out.println(a1);
+        Set<String> keys = autoMotives.keySet();
+        for(String key : keys) {
+            System.out.println(autoMotives.get(key));
+        }
     }
 
-    public void updateOptionSetName(String optionSetName, String newName) throws AutomotiveException {
-        a1.setOptionSetName(optionSetName, newName);
+    public void updateOptionSetName(String autoName, String optionSetName, String newName) throws AutomotiveException {
+        autoMotives.get(autoName).setOptionSetName(optionSetName, newName);
     }
 
-    public void updateOptionPrice(String optionSetName, String optionName, int newprice) throws AutomotiveException {
-        a1.setOptionPrice(optionSetName, optionName, newprice);
+    public void updateOptionPrice(String autoName, String optionSetName, String optionName, int newprice) throws AutomotiveException {
+        autoMotives.get(autoName).setOptionPrice(optionSetName, optionName, newprice);
     }
 
-    public Automotive getA1() {
-        return a1;
+    public Automotive getAutoMotive(String name) {
+        return autoMotives.get(name);
     }
 
-    public void setA1(Automotive a1) {
-        this.a1 = a1;
+    public void setAutoMotive(Automotive auto) {
+        autoMotives.put(auto.getName(), auto);
+    }
+
+    public void deleteAutoMotive(String name) {
+        autoMotives.remove(name);
     }
 }

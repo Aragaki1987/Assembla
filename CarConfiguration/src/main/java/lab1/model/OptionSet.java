@@ -3,17 +3,19 @@ package lab1.model;
 import lab1.exception.AutomotiveException;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 //OptionSet class that can be serialized into stream
 public class OptionSet implements Serializable {
     private String name;  // name of OptionSet (color, transmission, ... )
-    private Option [] options; // list of option for each option set
+    private ArrayList<Option> options; // list of option for each option set
+    private Option choice;
 
 
     //constructor for optionset with combination of properties. They have protected modifier to prevent access from outside
     protected OptionSet() {
-        options = new Option[0];
+        options = new ArrayList<Option>();
     }
 
     protected OptionSet(String name) {
@@ -21,16 +23,6 @@ public class OptionSet implements Serializable {
         this.name = name;
     }
 
-    protected OptionSet(String name, int count) {
-        this.name = name;
-        options = new Option[count];
-        for(int i = 0; i < options.length; i++) {
-            options[i] = new Option();
-        }
-    }
-
-
-    //getter and setter ( modified by hand to get and set single option from option list ) with all CRUD
     protected String getName() {
         return name;
     }
@@ -39,73 +31,58 @@ public class OptionSet implements Serializable {
         this.name = name;
     }
 
-    protected Option[] getOptions() {
-        return options;
-    }
+    protected Option getOption(String name) {
+        for (Option option : options) {
+            if (option.getName().equals(name)) {
+                return option;
+            }
+        }
 
-    protected void setOptions(Option[] options) {
-        this.options = options;
+        return null;
     }
 
     protected void setOption(int i, String name, int price) throws AutomotiveException {
         try {
-            options[i].setName(name);
-            options[i].setPrice(price);
-        } catch (Throwable th) {
-            throw new AutomotiveException("Cannot set option at " + i, th);
+            options.add(i, new Option(name, price));
+        } catch (IndexOutOfBoundsException e) {
+            throw new AutomotiveException("Position is out of bound");
         }
     }
 
-    protected void addOption(String name, int price) throws AutomotiveException {
-        try {
-            Option option = new Option(name, price);
-            int oldSize = options.length;
-            options = Arrays.copyOf(options, oldSize + 1);
-            options[oldSize] = option;
-        } catch (Throwable th) {
-            throw new AutomotiveException("Cannot add option ", th);
-        }
-    }
-
-    protected Option getOption(String name) throws AutomotiveException {
-        try {
-            return options[findOption(name)];
-        } catch (Throwable th) {
-            throw new AutomotiveException("Cannot find option." + name, th);
-        }
-    }
-
-    protected int getOptionPrice(String name) throws AutomotiveException {
-        try {
-            return getOption(name).getPrice();
-        } catch (Throwable th) {
-            throw new AutomotiveException("Cannot find option " + name, th);
-        }
-    }
-
-    protected void setOptionPrice(String optionName, int newPrice) throws AutomotiveException {
-        getOption(optionName).setPrice(newPrice);
-    }
-
-    protected void deleteOption(String name) throws AutomotiveException {
-        try {
-            options[findOption(name)] = null;
-        } catch (Throwable th) {
-            throw new AutomotiveException("Cannot delete option " + name, th);
-        }
-    }
-
-
-    //private helper method
-    private int findOption(String name) {
-        if(options != null) {
-            for(int i = 0; i < options.length; i++) {
-                if(options[i].getName().equals(name))
-                    return i;
+    protected void deleteOption(String name) {
+        for (Option option : options) {
+            if (option.getName().equals(name)) {
+                options.remove(option);
             }
         }
+    }
 
-        return -1;
+    protected void addOption(String name, int price) {
+        options.add(new Option(name, price));
+    }
+
+    public Option getChoice() {
+        return choice;
+    }
+
+    public void setChoice(String optionName) {
+        this.choice = getOption(optionName);
+    }
+
+    protected ArrayList<Option> getOptions() {
+        return options;
+    }
+
+    protected void setOptions(ArrayList<Option> options) {
+        this.options = options;
+    }
+
+    public void setOptionPrice(String optionName, int newprice) throws AutomotiveException {
+        try {
+            getOption(optionName).setPrice(newprice);
+        } catch (NullPointerException e) {
+            throw new AutomotiveException("Do not find option with option name = " + optionName, e);
+        }
     }
 
     //toString method uses StringBuilder
@@ -115,14 +92,16 @@ public class OptionSet implements Serializable {
         result.append("OptionSet{name='");
         result.append(name);
         result.append("'");
+        result.append(", choice=");
+        result.append(choice);
         result.append(", options=");
-        result.append(Arrays.toString(options));
+        result.append(options);
         result.append("}");
         return result.toString();
     }
 
     //Option class is inner class of OptionSet class, can be serialized
-    private class Option implements Serializable {
+    protected class Option implements Serializable {
         private String name; // name of option (auto, manual, ...)
         private int price;  // price of option
 

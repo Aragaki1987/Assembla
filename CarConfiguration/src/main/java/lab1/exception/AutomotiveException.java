@@ -2,7 +2,7 @@ package lab1.exception;
 
 
 //Specified exception for program
-public class AutomotiveException extends Throwable{
+public class AutomotiveException extends Throwable {
 
     public AutomotiveException() {
     }

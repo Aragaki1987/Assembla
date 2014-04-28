@@ -3,6 +3,8 @@ package lab1.model;
 import lab1.exception.AutomotiveException;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /*
@@ -28,22 +30,20 @@ import java.util.Arrays;
 public class Automotive implements Serializable {
     private String name;   //name of Automotive
     private int basePrice;  //base price
-    private OptionSet[] optionSets;  // list of option set that available for this automotive
+    private ArrayList<OptionSet> optionSets;  // list of option set that available for this automotive
+    private String make;
+    private String model;
 
 
     //Constructor for automotive class with combinations of properties
     public Automotive() {
-        optionSets = new OptionSet[0];  //avoid NullPointerException
+        optionSets = new ArrayList<OptionSet>();  //avoid NullPointerException
     }
 
     public Automotive(String name, int basePrice, int optionSetSize) {
+        this();
         this.name = name;
         this.basePrice = basePrice;
-        optionSets = new OptionSet[optionSetSize];    //avoid NullPointerException
-
-        for (int i = 0; i < optionSets.length; i++) {
-            optionSets[i] = new OptionSet();     //avoid NullPointerException
-        }
     }
 
 
@@ -64,23 +64,24 @@ public class Automotive implements Serializable {
         this.name = name;
     }
 
-    protected OptionSet[] getOptionSets() {
+    public ArrayList<OptionSet> getOptionSets() {
         return optionSets;
     }
 
-    protected void setOptionSets(OptionSet[] optionSets) {
+    public void setOptionSets(ArrayList<OptionSet> optionSets) {
         this.optionSets = optionSets;
     }
 
-    public OptionSet getOptionSet(String name) throws AutomotiveException {
-        try {
-            return optionSets[findOptionSet(name)];
-        } catch (Throwable th) {
-            throw new AutomotiveException("Cannot find option.", th);
+    public OptionSet getOptionSet(String name) {
+        for (OptionSet optionSet : optionSets) {
+            if (optionSet.getName().equals(name)) {
+                return optionSet;
+            }
         }
+        return null;
     }
 
-    public void setOptionSetName(String oldName, String newName) throws AutomotiveException {
+    public void setOptionSetName(String oldName, String newName) {
         getOptionSet(oldName).setName(newName);
     }
 
@@ -90,7 +91,7 @@ public class Automotive implements Serializable {
 
     protected void setOptionSet(int i, OptionSet optionSet) throws AutomotiveException {
         try {
-            optionSets[i] = optionSet;
+            optionSets.add(i, optionSet);
         } catch (Throwable th) {
             throw new AutomotiveException("Cannot add option to this position", th);
         }
@@ -100,48 +101,73 @@ public class Automotive implements Serializable {
     here is a trick to increase it, copy old array to new array with new capacity.
     This trick is used in ArrayList (Java core). You can look at source code for it.
     */
-    public void addOptionSet(String optionSetName, String optionName, int price) throws AutomotiveException {
-        int i = findOptionSet(optionSetName);
-        OptionSet optSet = null;
-        if (i == -1) {
-            optSet = new OptionSet(optionSetName);
-            int oldSize = optionSets.length;
-            optionSets = Arrays.copyOf(optionSets, oldSize + 1);
-            optionSets[oldSize] = optSet;
-        } else {
-            optSet = getOptionSet(optionSetName);
+    public void addOptionSet(String optionSetName, String optionName, int price) {
+        OptionSet optionSet = getOptionSet(optionSetName);
+
+        if (optionSet == null) {
+            optionSet = new OptionSet();
+            optionSet.setName(optionSetName);
+            optionSets.add(optionSet);
         }
 
-        optSet.addOption(optionName, price);
+        optionSet.addOption(optionName, price);
+
     }
 
     public void deleteOptionSet(String name) throws AutomotiveException {
         try {
-            optionSets[findOptionSet(name)] = null;
-        } catch (Throwable th) {
-            throw new AutomotiveException("Cannot add option to this position", th);
+            optionSets.remove(getOptionSet(name));
+        } catch (Exception e) {
+            throw new AutomotiveException("Cannot delete Option set " + name);
         }
     }
 
 
-    //private helper method
-    private int findOptionSet(String name) {
-        try {
-            if (optionSets != null && optionSets.length > 0) {
-                for (int i = 0; i < optionSets.length; i++) {
-                    if (optionSets[i].getName().equals(name)) {
-                        return i;
-                    }
-                }
-            }
-        } catch (Exception e) {
-        }
+    public String getMake() {
+        return make;
+    }
 
-        return -1;
+    public void setMake(String make) {
+        this.make = make;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getOptionChoice(String setName) {
+        return getOptionSet(setName).getChoice().getName();
+    }
+
+    public int getOptionChoicePrice(String setName) {
+        return getOptionSet(setName).getChoice().getPrice();
+    }
+
+    public void setOptionChoice(String setName, String optionName) {
+        getOptionSet(setName).setChoice(optionName);
     }
 
     public void print() {
         System.out.println(toString());
+    }
+
+    public int totalPrice() {
+        int price = basePrice;
+
+        for (OptionSet set : optionSets) {
+            try {
+                if (set.getChoice() != null)
+                    price += getOptionChoicePrice(set.getName());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        return price;
     }
 
     @Override
@@ -152,8 +178,18 @@ public class Automotive implements Serializable {
         result.append("'");
         result.append(", basePrice=");
         result.append(basePrice);
-        result.append(", optionSets=");
-        result.append(Arrays.toString(optionSets));
+        result.append(", optionSets={");
+        for (OptionSet set : optionSets) {
+            result.append(" Option Set Name = ");
+            result.append(set.getName());
+            result.append("(");
+            result.append("option name = ");
+            result.append(getOptionChoice(set.getName()));
+            result.append(", option price = ");
+            result.append(getOptionChoicePrice(set.getName()));
+            result.append(")");
+        }
+        result.append("}, total price = " + totalPrice());
         result.append("}");
         return result.toString();
     }
