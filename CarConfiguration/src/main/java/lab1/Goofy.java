@@ -75,7 +75,3 @@ public class Goofy {
     }
 
 }
-
-
-Copyright © 2002–2010, Robert Sedgewick and Kevin Wayne. 
-Last updated: Wed Oct 31 18:42:27 EDT 2012.
