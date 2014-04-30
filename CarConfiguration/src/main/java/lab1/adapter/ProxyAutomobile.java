@@ -9,7 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.Set;
 
 public abstract class ProxyAutomobile {
-    private LinkedHashMap<String, Automotive> autoMotives = new LinkedHashMap<String, Automotive>();
+    public static LinkedHashMap<String, Automotive> autoMotives = new LinkedHashMap<String, Automotive>();
 
     public Automotive buildAuto(String fileName) throws AutomotiveException {
         return new FileIO().readFile(fileName);

@@ -31,7 +31,7 @@ public class OptionSet implements Serializable {
         this.name = name;
     }
 
-    protected Option getOption(String name) {
+    protected synchronized Option getOption(String name) {
         for (Option option : options) {
             if (option.getName().equals(name)) {
                 return option;
@@ -41,7 +41,7 @@ public class OptionSet implements Serializable {
         return null;
     }
 
-    protected void setOption(int i, String name, int price) throws AutomotiveException {
+    protected synchronized void setOption(int i, String name, int price) throws AutomotiveException {
         try {
             options.add(i, new Option(name, price));
         } catch (IndexOutOfBoundsException e) {
@@ -49,7 +49,7 @@ public class OptionSet implements Serializable {
         }
     }
 
-    protected void deleteOption(String name) {
+    protected synchronized void deleteOption(String name) {
         for (Option option : options) {
             if (option.getName().equals(name)) {
                 options.remove(option);
@@ -57,7 +57,7 @@ public class OptionSet implements Serializable {
         }
     }
 
-    protected void addOption(String name, int price) {
+    protected synchronized void addOption(String name, int price) {
         options.add(new Option(name, price));
     }
 

@@ -1,5 +1,5 @@
-Multithreaded Programs
-----------------------
+//Multithreaded Programs
+//----------------------
 //Hello Threads
 class ThreadX extends Thread {
   

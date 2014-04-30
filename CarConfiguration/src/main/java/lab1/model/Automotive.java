@@ -72,7 +72,7 @@ public class Automotive implements Serializable {
         this.optionSets = optionSets;
     }
 
-    public OptionSet getOptionSet(String name) {
+    public synchronized OptionSet getOptionSet(String name) {
         for (OptionSet optionSet : optionSets) {
             if (optionSet.getName().equals(name)) {
                 return optionSet;
@@ -81,11 +81,11 @@ public class Automotive implements Serializable {
         return null;
     }
 
-    public void setOptionSetName(String oldName, String newName) {
+    public synchronized void setOptionSetName(String oldName, String newName) {
         getOptionSet(oldName).setName(newName);
     }
 
-    public void setOptionPrice(String optionSetName, String optionName, int newprice) throws AutomotiveException {
+    public synchronized void setOptionPrice(String optionSetName, String optionName, int newprice) throws AutomotiveException {
         getOptionSet(optionSetName).setOptionPrice(optionName, newprice);
     }
 
@@ -97,11 +97,7 @@ public class Automotive implements Serializable {
         }
     }
 
-    /*If you notice, array cannot increase size if it has already initiated.
-    here is a trick to increase it, copy old array to new array with new capacity.
-    This trick is used in ArrayList (Java core). You can look at source code for it.
-    */
-    public void addOptionSet(String optionSetName, String optionName, int price) {
+    public synchronized void addOptionSet(String optionSetName, String optionName, int price) {
         OptionSet optionSet = getOptionSet(optionSetName);
 
         if (optionSet == null) {
@@ -114,7 +110,7 @@ public class Automotive implements Serializable {
 
     }
 
-    public void deleteOptionSet(String name) throws AutomotiveException {
+    public synchronized void deleteOptionSet(String name) throws AutomotiveException {
         try {
             optionSets.remove(getOptionSet(name));
         } catch (Exception e) {
