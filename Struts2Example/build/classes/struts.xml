@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.custom.i18n.resources" value="global" />
+	 <constant name="struts.action.extension" value="jsp,"/>
+	
+	<package name="user" extends="struts-default">
+		<interceptors>
+			<interceptor name="printer"
+				class="com.stanford.example.struts2.interceptors.PrintInterceptor"></interceptor>
+			<interceptor-stack name="stackPrinter">
+				<interceptor-ref name="printer" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-action-ref name="Login" />
+		<action name="Login">
+			<result>login.jsp</result>
+		</action>
+		<action name="welcome" class="com.stanford.example.struts2.WelcomeAction">
+			<interceptor-ref name="stackPrinter" />
+			<result name="success">welcome.jsp</result>
+			<result name="error">error.jsp</result>
+			<result name="input">login.jsp</result>
+		</action>
+	</package>
+	
+	<package name="tile" namespace="/tile" extends="tiles-default">		
+		<default-action-ref name="Login" />
+		<action name="Login">
+			<result type="tiles">login</result>
+		</action>
+		<action name="welcome" class="com.stanford.example.struts2.WelcomeAction">			
+			<result name="success" type="tiles">login-success</result>
+			<result name="error" type="tiles">login-error</result>
+			<result name="input" type="tiles">login-validate-failed</result>
+		</action>
+	</package>
+</struts>
