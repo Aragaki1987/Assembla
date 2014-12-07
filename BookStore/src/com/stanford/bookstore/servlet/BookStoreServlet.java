@@ -1,5 +1,0 @@
-package com.stanford.bookstore.servlet;
-
-public class BookStoreServlet {
-	
-}

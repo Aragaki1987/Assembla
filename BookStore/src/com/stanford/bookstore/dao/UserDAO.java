@@ -21,7 +21,7 @@ public class UserDAO extends AbtractDAO {
 			Class.forName("org.hsqldb.jdbc.JDBCDriver");
 
 			conn = DriverManager.getConnection(
-					"jdbc:hsqldb:file:F:\\Workspace\\BookStore\\db\\testdb;ifexists=true", "SA", "");
+					"jdbc:hsqldb:file:" + DATABASE_ADDRESS + DATABASE_PARAMETER, "SA", "");
 			stmt = conn.createStatement();
 			
 			List<User> users = new ArrayList<User>();
@@ -53,7 +53,7 @@ public class UserDAO extends AbtractDAO {
 			Class.forName("org.hsqldb.jdbc.JDBCDriver");
 
 			conn = DriverManager.getConnection(
-					"jdbc:hsqldb:file:F:\\Workspace\\BookStore\\db\\testdb;ifexists=true", "SA", "");
+					"jdbc:hsqldb:file:" + DATABASE_ADDRESS + DATABASE_PARAMETER, "SA", "");
 			stmt = conn.prepareStatement("select * from user where username = ?");
 			stmt.setString(1, username);
 			

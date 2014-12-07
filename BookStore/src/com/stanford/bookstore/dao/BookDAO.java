@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.stanford.bookstore.model.Book;
@@ -19,7 +21,7 @@ public class BookDAO extends AbtractDAO {
 			Class.forName("org.hsqldb.jdbc.JDBCDriver");
 
 			conn = DriverManager.getConnection(
-					"jdbc:hsqldb:file:F:\\Workspace\\BookStore\\db\\testdb;ifexists=true", "SA", "");
+					"jdbc:hsqldb:file:" + DATABASE_ADDRESS + DATABASE_PARAMETER, "SA", "");
 			stmt = conn.prepareStatement("select * from book where id = ?");
 			stmt.setInt(1, id);
 			
@@ -28,7 +30,7 @@ public class BookDAO extends AbtractDAO {
 				book = new Book();
 				book.setId(rs.getInt("ID"));
 				book.setName(rs.getString("NAME"));
-				book.setPrice(rs.getString("PRICE"));
+				book.setPrice(rs.getInt("PRICE"));
 				book.setAuthor(rs.getString("AUTHOR"));
 			}
 			
@@ -51,7 +53,7 @@ public class BookDAO extends AbtractDAO {
 			Class.forName("org.hsqldb.jdbc.JDBCDriver");
 
 			conn = DriverManager.getConnection(
-					"jdbc:hsqldb:file:F:\\Workspace\\BookStore\\db\\testdb;ifexists=true", "SA", "");
+					"jdbc:hsqldb:file:" + DATABASE_ADDRESS + DATABASE_PARAMETER, "SA", "");
 			stmt = conn.prepareStatement("select * from book where name = ?");
 			stmt.setString(1, name);
 			
@@ -60,7 +62,7 @@ public class BookDAO extends AbtractDAO {
 				book = new Book();
 				book.setId(rs.getInt("ID"));
 				book.setName(rs.getString("NAME"));
-				book.setPrice(rs.getString("PRICE"));
+				book.setPrice(rs.getInt("PRICE"));
 				book.setAuthor(rs.getString("AUTHOR"));
 			}
 			
@@ -83,22 +85,25 @@ public class BookDAO extends AbtractDAO {
 			Class.forName("org.hsqldb.jdbc.JDBCDriver");
 
 			conn = DriverManager.getConnection(
-					"jdbc:hsqldb:file:F:\\Workspace\\BookStore\\db\\testdb;ifexists=true", "SA", "");
+					"jdbc:hsqldb:file:" + DATABASE_ADDRESS + DATABASE_PARAMETER, "SA", "");
 			stmt = conn.prepareStatement("select * from book");
 			rs = stmt.executeQuery();
-			
+			results = new ArrayList<Book>();
 			while(rs.next()) {
 				Book book = new Book();
 				book.setId(rs.getInt("ID"));
 				book.setName(rs.getString("NAME"));
-				book.setPrice(rs.getString("PRICE"));
+				book.setPrice(rs.getInt("PRICE"));
 				book.setAuthor(rs.getString("AUTHOR"));
 				results.add(book);
 			}
 			
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new Exception(e.getMessage());
+			throw new SQLException(e.getMessage());
+		} catch (ClassNotFoundException e) {			
+			e.printStackTrace();
+			throw new ClassNotFoundException(e.getMessage());
 		} finally {
 			closeStuff(conn, stmt, rs);
 		}

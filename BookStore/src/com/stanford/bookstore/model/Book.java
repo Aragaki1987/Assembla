@@ -3,7 +3,7 @@ package com.stanford.bookstore.model;
 public class Book {
 	private Integer id;
 	private String name;
-	private String price;
+	private Integer price;
 	private String author;	
 	
 	public Integer getId() {
@@ -18,10 +18,10 @@ public class Book {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
-	public void setPrice(String price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 	public String getAuthor() {
