@@ -4,8 +4,11 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
+	<!--localization  -->
 	<constant name="struts.custom.i18n.resources" value="global" />
-	 <constant name="struts.action.extension" value="jsp,"/>
+	
+	<!--Change postfix  -->
+	<constant name="struts.action.extension" value="jsp,"/>
 	
 	<package name="user" extends="struts-default">
 		<interceptors>
@@ -25,6 +28,27 @@
 			<result name="success">welcome.jsp</result>
 			<result name="error">error.jsp</result>
 			<result name="input">login.jsp</result>
+		</action>
+	</package>
+	
+	<package name="localization" namespace="/localization" extends="struts-default">
+		<interceptors>
+			<interceptor name="printer"
+				class="com.stanford.example.struts2.interceptors.PrintInterceptor"></interceptor>
+			<interceptor-stack name="stackPrinter">
+				<interceptor-ref name="printer" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-action-ref name="Login" />
+		<action name="Login">
+			<result>/localization/login.jsp</result>
+		</action>
+		<action name="welcome" class="com.stanford.example.struts2.WelcomeAction">
+			<interceptor-ref name="stackPrinter" />
+			<result name="success">/localization/welcome.jsp</result>
+			<result name="error">/localization/error.jsp</result>
+			<result name="input">/localization/login.jsp</result>
 		</action>
 	</package>
 	

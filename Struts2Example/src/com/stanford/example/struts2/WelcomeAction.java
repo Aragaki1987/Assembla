@@ -14,13 +14,13 @@ public class WelcomeAction extends ActionSupport{
 			return ERROR;
 	}
 	
-	public void validate() {
+	/*public void validate() {
 		if(username.isEmpty())
 			addFieldError("username", "UserName is required");
 		if(password.isEmpty())
 			addFieldError("password", "Password is required");
 	}
-
+*/
 	public String getUsername() {
 		return username;
 	}

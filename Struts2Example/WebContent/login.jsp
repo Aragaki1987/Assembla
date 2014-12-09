@@ -5,24 +5,11 @@
 <body>
 	<h1>Struts 2 Hello World Example</h1>
 
-	<s:form action="welcome">
-		<s:textfield name="username" key="global.username" />
-		<s:password name="password" key="global.password" />
-		<s:submit key="global.submit" name="submit" />
+	<s:form action="welcome" validate="true">
+		<s:textfield name="username" label="UserName" />
+		<s:password name="password" label="Password" />
+		<s:submit name="submit" value="Submit"/>
 	</s:form>
-
-	<s:url id="localeEN" namespace="/" action="locale">
-		<s:param name="request_locale">en</s:param>
-	</s:url>
-	<s:url id="localeDE" namespace="/" action="locale">
-		<s:param name="request_locale">de</s:param>
-	</s:url>
-	<s:url id="localeFR" namespace="/" action="locale">
-		<s:param name="request_locale">fr</s:param>
-	</s:url>
-
-	<s:a href="%{localeEN}">English</s:a>
-	<s:a href="%{localeDE}">German</s:a>
-	<s:a href="%{localeFR}">France</s:a>
+	
 </body>
 </html>
