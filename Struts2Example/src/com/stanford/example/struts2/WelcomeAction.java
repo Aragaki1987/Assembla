@@ -8,7 +8,7 @@ public class WelcomeAction extends ActionSupport{
 	
 	public String execute() throws Exception {
 		System.out.println("WelcomeAction.execute() is called...");
-		if(username.equals("Admin"))
+		if(username.equalsIgnoreCase("Admin"))
 			return SUCCESS;
 		else 
 			return ERROR;

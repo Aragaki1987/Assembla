@@ -11,13 +11,13 @@
 		<s:submit key="global.submit" name="submit" />
 	</s:form>
 
-	<s:url id="localeEN" namespace="/" action="locale">
+	<s:url id="localeEN" namespace="/localization" action="locale">
 		<s:param name="request_locale">en</s:param>
 	</s:url>
-	<s:url id="localeDE" namespace="/" action="locale">
+	<s:url id="localeDE" namespace="/localization" action="locale">
 		<s:param name="request_locale">de</s:param>
 	</s:url>
-	<s:url id="localeFR" namespace="/" action="locale">
+	<s:url id="localeFR" namespace="/localization" action="locale">
 		<s:param name="request_locale">fr</s:param>
 	</s:url>
 
