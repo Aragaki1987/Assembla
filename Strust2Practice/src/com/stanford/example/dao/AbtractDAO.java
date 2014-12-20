@@ -1,25 +1,26 @@
 package com.stanford.example.dao;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 public abstract class AbtractDAO {
-	
-	public static final String DATABASE_ADDRESS = "E:\\workspace\\Strust2Practice\\db\\testdb";
-	
-	public static final String DATABASE_PARAMETER = ";readonly=true;ifexists=true";
-	
-	public static void closeStuff(Connection conn, Statement stmt, ResultSet rs) throws SQLException {
-		if(rs != null) {
-			rs.close();
+	private static SessionFactory sessionFactory = getSessionFactory();
+
+	public static SessionFactory getSessionFactory() {		
+		if (sessionFactory == null) {
+			try { // Create the SessionFactory
+				sessionFactory = new Configuration().configure()
+						.buildSessionFactory();
+			} catch (Exception ex) {
+				System.err.println("sessionFactory error " + ex);
+				// throw new ExceptionInInitializerError(ex);
+			}
 		}
-		if(stmt != null) {
-			stmt.close();
-		}
-		if(conn != null) {
-			conn.close();
-		}
+		return sessionFactory;
+	}
+	
+	public static Session getCurrentSession() {
+		return getSessionFactory().getCurrentSession();
 	}
 }
